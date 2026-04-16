@@ -40,7 +40,7 @@ internal fun handleNodeAction(
         is NodeDetailAction.HandleNodeMenuAction -> {
             when (val menuAction = action.action) {
                 is NodeMenuAction.DirectMessage -> {
-                    val route = viewModel.getDirectMessageRoute(menuAction.node, uiState.ourNode)
+                    val route = viewModel.getDirectMessageRoute(menuAction.node, uiState.ourNode, menuAction.forceLegacy)
                     navigateToMessages(route)
                 }
                 is NodeMenuAction.Remove -> {
