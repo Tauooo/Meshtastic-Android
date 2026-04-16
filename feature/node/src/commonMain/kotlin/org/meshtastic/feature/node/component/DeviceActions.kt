@@ -32,6 +32,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -74,13 +78,25 @@ fun DeviceActions(
     modifier: Modifier = Modifier,
     isLocal: Boolean = false,
 ) {
+    var forceLegacyChannel by rememberSaveable(node.num) { mutableStateOf(false) }
+
     Column(modifier = modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(16.dp)) {
         SectionCard(title = Res.string.actions) {
-            PrimaryActionsRow(node = node, isLocal = isLocal, onAction = onAction)
+            PrimaryActionsRow(
+                node = node,
+                isLocal = isLocal,
+                forceLegacyChannel = forceLegacyChannel,
+                onAction = onAction,
+            )
 
             if (!isLocal) {
                 SectionDivider(Modifier.padding(vertical = 8.dp))
-                ManagementActions(node = node, onAction = onAction)
+                ManagementActions(
+                    node = node,
+                    forceLegacyChannel = forceLegacyChannel,
+                    onToggleLegacy = { forceLegacyChannel = it },
+                    onAction = onAction,
+                )
             }
         }
 
@@ -99,7 +115,12 @@ fun DeviceActions(
 }
 
 @Composable
-private fun PrimaryActionsRow(node: Node, isLocal: Boolean, onAction: (NodeDetailAction) -> Unit) {
+private fun PrimaryActionsRow(
+    node: Node,
+    isLocal: Boolean,
+    forceLegacyChannel: Boolean,
+    onAction: (NodeDetailAction) -> Unit,
+) {
     Row(
         modifier = Modifier.padding(horizontal = 20.dp).fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -107,11 +128,16 @@ private fun PrimaryActionsRow(node: Node, isLocal: Boolean, onAction: (NodeDetai
     ) {
         if (!isLocal) {
             Button(
-                onClick = { onAction(NodeDetailAction.HandleNodeMenuAction(NodeMenuAction.DirectMessage(node))) },
+                onClick = {
+                    onAction(
+                        NodeDetailAction.HandleNodeMenuAction(
+                            NodeMenuAction.DirectMessage(node, forceLegacy = forceLegacyChannel)
+                        )
+                    )
+                },
                 modifier = Modifier.weight(1f),
                 shape = MaterialTheme.shapes.large,
-                colors =
-                ButtonDefaults.buttonColors(
+                colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                 ),
@@ -137,7 +163,9 @@ private fun PrimaryActionsRow(node: Node, isLocal: Boolean, onAction: (NodeDetai
         if (!isLocal) {
             IconToggleButton(
                 checked = node.isFavorite,
-                onCheckedChange = { onAction(NodeDetailAction.HandleNodeMenuAction(NodeMenuAction.Favorite(node))) },
+                onCheckedChange = {
+                    onAction(NodeDetailAction.HandleNodeMenuAction(NodeMenuAction.Favorite(node)))
+                },
             ) {
                 Icon(
                     imageVector = if (node.isFavorite) MeshtasticIcons.Favorite else MeshtasticIcons.NotFavorite,
@@ -150,16 +178,16 @@ private fun PrimaryActionsRow(node: Node, isLocal: Boolean, onAction: (NodeDetai
 }
 
 @Composable
-private fun ManagementActions(node: Node, onAction: (NodeDetailAction) -> Unit) {
+private fun ManagementActions(
+    node: Node,
+    forceLegacyChannel: Boolean,
+    onToggleLegacy: (Boolean) -> Unit,
+    onAction: (NodeDetailAction) -> Unit,
+) {
     Column {
         SwitchListItem(
             text = stringResource(Res.string.ignore),
-            leadingIcon =
-            if (node.isIgnored) {
-                MeshtasticIcons.VolumeMute
-            } else {
-                MeshtasticIcons.VolumeUp
-            },
+            leadingIcon = if (node.isIgnored) MeshtasticIcons.VolumeMute else MeshtasticIcons.VolumeUp,
             checked = node.isIgnored,
             onClick = { onAction(NodeDetailAction.HandleNodeMenuAction(NodeMenuAction.Ignore(node))) },
         )
@@ -167,14 +195,18 @@ private fun ManagementActions(node: Node, onAction: (NodeDetailAction) -> Unit) 
         if (node.capabilities.canMuteNode) {
             SwitchListItem(
                 text = stringResource(Res.string.mute_notifications),
-                leadingIcon =
-                if (node.isMuted) {
-                    MeshtasticIcons.VolumeOff
-                } else {
-                    MeshtasticIcons.VolumeUp
-                },
+                leadingIcon = if (node.isMuted) MeshtasticIcons.VolumeOff else MeshtasticIcons.VolumeUp,
                 checked = node.isMuted,
                 onClick = { onAction(NodeDetailAction.HandleNodeMenuAction(NodeMenuAction.Mute(node))) },
+            )
+        }
+
+        if (node.hasPKC) {
+            SwitchListItem(
+                text = "Force legacy channel (bypass PKC)",
+                leadingIcon = MeshtasticIcons.Message,
+                checked = forceLegacyChannel,
+                onClick = { onToggleLegacy(!forceLegacyChannel) },
             )
         }
 
