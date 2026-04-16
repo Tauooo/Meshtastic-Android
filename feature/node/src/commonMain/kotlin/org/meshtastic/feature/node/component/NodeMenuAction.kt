@@ -28,7 +28,7 @@ sealed class NodeMenuAction {
 
     data class Favorite(val node: Node) : NodeMenuAction()
 
-    data class DirectMessage(val node: Node) : NodeMenuAction()
+    data class DirectMessage(val node: Node, val forceLegacy: Boolean = false) : NodeMenuAction()
 
     data class RequestUserInfo(val node: Node) : NodeMenuAction()
 
