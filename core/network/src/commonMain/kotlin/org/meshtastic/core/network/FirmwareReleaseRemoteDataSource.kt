@@ -27,6 +27,9 @@ class FirmwareReleaseRemoteDataSource(
     private val apiService: ApiService,
     private val dispatchers: CoroutineDispatchers,
 ) {
-    suspend fun getFirmwareReleases(): NetworkFirmwareReleases =
-        withContext(dispatchers.io) { apiService.getFirmwareReleases() }
+	suspend fun getFirmwareReleases(): NetworkFirmwareReleases =
+        withContext(dispatchers.io) {
+            try { apiService.getFirmwareReleases() }
+            catch (e: NotImplementedError) { NetworkFirmwareReleases() }
+        }
 }
