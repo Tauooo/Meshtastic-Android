@@ -59,7 +59,6 @@ import org.meshtastic.core.ui.icon.VolumeOff
 import org.meshtastic.core.ui.icon.VolumeUp
 import org.meshtastic.feature.node.model.LogsType
 import org.meshtastic.feature.node.model.NodeDetailAction
-import org.meshtastic.feature.node.model.isEffectivelyUnmessageable
 import org.meshtastic.proto.Config
 
 @Composable
@@ -106,7 +105,7 @@ private fun PrimaryActionsRow(node: Node, isLocal: Boolean, onAction: (NodeDetai
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        if (!node.isEffectivelyUnmessageable && !isLocal) {
+        if (!isLocal) {
             Button(
                 onClick = { onAction(NodeDetailAction.HandleNodeMenuAction(NodeMenuAction.DirectMessage(node))) },
                 modifier = Modifier.weight(1f),
@@ -125,11 +124,11 @@ private fun PrimaryActionsRow(node: Node, isLocal: Boolean, onAction: (NodeDetai
 
         OutlinedButton(
             onClick = { onAction(NodeDetailAction.ShareContact) },
-            modifier = if (node.isEffectivelyUnmessageable || isLocal) Modifier.weight(1f) else Modifier,
+            modifier = if (isLocal) Modifier.weight(1f) else Modifier,
             shape = MaterialTheme.shapes.large,
         ) {
             Icon(MeshtasticIcons.QrCode2, contentDescription = null)
-            if (node.isEffectivelyUnmessageable || isLocal) {
+            if (isLocal) {
                 Spacer(Modifier.width(8.dp))
                 Text(stringResource(Res.string.share_contact))
             }
