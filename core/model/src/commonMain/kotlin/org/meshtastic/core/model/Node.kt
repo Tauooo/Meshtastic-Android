@@ -56,6 +56,7 @@ data class Node(
     val isFavorite: Boolean = false,
     val isIgnored: Boolean = false,
     val isMuted: Boolean = false,
+    val forceLegacyChannel: Boolean = false,
     val environmentMetrics: EnvironmentMetrics = EnvironmentMetrics(),
     val powerMetrics: PowerMetrics = PowerMetrics(),
     val paxcounter: Paxcount = Paxcount(),

@@ -26,6 +26,8 @@ sealed class NodeMenuAction {
 
     data class Mute(val node: Node) : NodeMenuAction()
 
+    data class ToggleForceLegacyChannel(val node: Node) : NodeMenuAction()
+
     data class Favorite(val node: Node) : NodeMenuAction()
 
     data class DirectMessage(val node: Node, val forceLegacy: Boolean = false) : NodeMenuAction()

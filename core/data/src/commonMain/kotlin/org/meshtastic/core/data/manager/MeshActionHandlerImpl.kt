@@ -92,6 +92,7 @@ class MeshActionHandlerImpl(
                 is ServiceAction.Favorite -> handleFavorite(action, myNodeNum)
                 is ServiceAction.Ignore -> handleIgnore(action, myNodeNum)
                 is ServiceAction.Mute -> handleMute(action, myNodeNum)
+                is ServiceAction.ToggleForceLegacyChannel -> handleToggleForceLegacyChannel(action)
                 is ServiceAction.Reaction -> handleReaction(action, myNodeNum)
                 is ServiceAction.ImportContact -> handleImportContact(action, myNodeNum)
                 is ServiceAction.SendContact -> {
@@ -141,6 +142,11 @@ class MeshActionHandlerImpl(
         val node = action.node
         commandSender.sendAdmin(myNodeNum) { AdminMessage(toggle_muted_node = node.num) }
         nodeManager.updateNode(node.num) { it.copy(isMuted = !node.isMuted) }
+    }
+
+    private fun handleToggleForceLegacyChannel(action: ServiceAction.ToggleForceLegacyChannel) {
+        val node = action.node
+        nodeManager.updateNode(node.num) { it.copy(forceLegacyChannel = !node.forceLegacyChannel) }
     }
 
     private fun handleReaction(action: ServiceAction.Reaction, myNodeNum: Int) {

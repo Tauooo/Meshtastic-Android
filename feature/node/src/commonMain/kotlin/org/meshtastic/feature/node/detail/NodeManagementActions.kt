@@ -99,6 +99,10 @@ constructor(
         scope.launch(ioDispatcher) { serviceRepository.onServiceAction(ServiceAction.Mute(node)) }
     }
 
+    open fun toggleForceLegacyChannel(scope: CoroutineScope, node: Node) {
+        scope.launch(ioDispatcher) { serviceRepository.onServiceAction(ServiceAction.ToggleForceLegacyChannel(node)) }
+    }
+
     open fun requestFavoriteNode(scope: CoroutineScope, node: Node) {
         scope.launch {
             val message =

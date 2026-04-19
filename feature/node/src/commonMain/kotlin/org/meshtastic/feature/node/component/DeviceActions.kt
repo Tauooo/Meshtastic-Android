@@ -32,10 +32,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -78,14 +74,12 @@ fun DeviceActions(
     modifier: Modifier = Modifier,
     isLocal: Boolean = false,
 ) {
-    var forceLegacyChannel by rememberSaveable(node.num) { mutableStateOf(false) }
-
     Column(modifier = modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(16.dp)) {
         SectionCard(title = Res.string.actions) {
             PrimaryActionsRow(
                 node = node,
                 isLocal = isLocal,
-                forceLegacyChannel = forceLegacyChannel,
+                forceLegacyChannel = node.forceLegacyChannel,
                 onAction = onAction,
             )
 
@@ -93,7 +87,7 @@ fun DeviceActions(
                 SectionDivider(Modifier.padding(vertical = 8.dp))
                 ManagementActions(
                     node = node,
-                    forceLegacyChannel = forceLegacyChannel,
+                    forceLegacyChannel = node.forceLegacyChannel,
                     onToggleLegacy = { forceLegacyChannel = it },
                     onAction = onAction,
                 )

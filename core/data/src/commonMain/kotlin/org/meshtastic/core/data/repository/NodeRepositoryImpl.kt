@@ -269,6 +269,7 @@ class NodeRepositoryImpl(
         isFavorite = isFavorite,
         isIgnored = isIgnored,
         isMuted = isMuted,
+        forceLegacyChannel = forceLegacyChannel,
         environmentTelemetry = org.meshtastic.proto.Telemetry(environment_metrics = environmentMetrics),
         powerTelemetry = org.meshtastic.proto.Telemetry(power_metrics = powerMetrics),
         paxcounter = paxcounter,
