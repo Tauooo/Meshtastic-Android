@@ -60,6 +60,7 @@ data class PacketEntity(
             relays = data.relays,
             filtered = filtered,
             transportMechanism = data.transportMechanism,
+            channel = channel,
         )
     }
 }
