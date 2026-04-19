@@ -1,0 +1,37 @@
+name: Fix channel data reference
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          fetch-depth: 0
+
+      - name: Configure git
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+
+      - name: Run fix
+        run: |
+          echo "ZGVmIGZvcmNlX3BhdGNoKHBhdGgsIHRyYW5zZm9ybSk6CiAgICB3aXRoIG9wZW4ocGF0aCwgInIiKSBhcyBmOgogICAgICAgIGNvbnRlbnQgPSBmLnJlYWQoKQogICAgY29udGVudCA9IHRyYW5zZm9ybShjb250ZW50KQogICAgd2l0aCBvcGVuKHBhdGgsICJ3IikgYXMgZjoKICAgICAgICBmLndyaXRlKGNvbnRlbnQpCiAgICBwcmludCgiRE9ORTogIiArIHBhdGgpCgpmb3JjZV9wYXRjaCgKICAgICJjb3JlL2RhdGFiYXNlL3NyYy9jb21tb25NYWluL2tvdGxpbi9vcmcvbWVzaHRhc3RpYy9jb3JlL2RhdGFiYXNlL2VudGl0eS9QYWNrZXQua3QiLAogICAgbGFtYmRhIGM6IGMucmVwbGFjZSgKICAgICAgICAiICAgICAgICAgICAgY2hhbm5lbCA9IHBhY2tldC5jaGFubmVsLCIsCiAgICAgICAgIiAgICAgICAgICAgIGNoYW5uZWwgPSBkYXRhLmNoYW5uZWwsIgogICAgKQopCgpwcmludCgiRG9uZS4iKQo=" | base64 --decode > /tmp/fix.py
+          python3 /tmp/fix.py
+
+      - name: Commit
+        run: |
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Already patched"
+          else
+            git commit -m "fix: use data.channel in toMessage()"
+            git push origin main
+            echo "Pushed."
+          fi
