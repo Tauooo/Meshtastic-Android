@@ -1,0 +1,37 @@
+name: Fix messages and toggle
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          fetch-depth: 0
+
+      - name: Configure git
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+
+      - name: Run fixes
+        run: |
+          echo "CmRlZiBwYXRjaChwYXRoLCBjaGVjaywgdHJhbnNmb3JtKToKICAgIHdpdGggb3BlbihwYXRoLCAiciIpIGFzIGY6CiAgICAgICAgY29udGVudCA9IGYucmVhZCgpCiAgICBpZiBjaGVjayBpbiBjb250ZW50OgogICAgICAgIHByaW50KCJTS0lQOiAiICsgcGF0aCArICIgYWxyZWFkeSBwYXRjaGVkIikKICAgICAgICByZXR1cm4KICAgIGNvbnRlbnQgPSB0cmFuc2Zvcm0oY29udGVudCkKICAgIHdpdGggb3BlbihwYXRoLCAidyIpIGFzIGY6CiAgICAgICAgZi53cml0ZShjb250ZW50KQogICAgcHJpbnQoIk9LOiAgICIgKyBwYXRoKQoKcGF0Y2goCiAgICAiZmVhdHVyZS9ub2RlL3NyYy9jb21tb25NYWluL2tvdGxpbi9vcmcvbWVzaHRhc3RpYy9mZWF0dXJlL25vZGUvZGV0YWlsL05vZGVEZXRhaWxWaWV3TW9kZWwua3QiLAogICAgImNvbnRhY3RDaGFubmVsIiwKICAgIGxhbWJkYSBjOiBjLnJlcGxhY2UoCiAgICAgICAgIiAgICAvKiogUmV0dXJucyB0aGUgdHlwZS1zYWZlIG5hdmlnYXRpb24gcm91dGUgZm9yIGEgZGlyZWN0IG1lc3NhZ2UgdG8gdGhpcyBub2RlLiAqL1xuICAgIGZ1biBnZXREaXJlY3RNZXNzYWdlUm91dGUobm9kZTogTm9kZSwgb3VyTm9kZTogTm9kZT8sIGZvcmNlTGVnYWN5OiBCb29sZWFuID0gZmFsc2UpOiBTdHJpbmcge1xuICAgICAgICB2YWwgaGFzUEtDID0gIWZvcmNlTGVnYWN5ICYmIG91ck5vZGU/Lmhhc1BLQyA9PSB0cnVlICYmIG5vZGUuaGFzUEtDXG4gICAgICAgIHZhbCBjaGFubmVsID0gaWYgKGhhc1BLQykgRGF0YVBhY2tldC5QS0NfQ0hBTk5FTF9JTkRFWCBlbHNlIG5vZGUuY2hhbm5lbFxuICAgICAgICByZXR1cm4gXCIke2NoYW5uZWx9JHtub2RlLnVzZXIuaWR9XCJcbiAgICB9IiwKICAgICAgICAiICAgIC8qKiBSZXR1cm5zIHRoZSB0eXBlLXNhZmUgbmF2aWdhdGlvbiByb3V0ZSBmb3IgYSBkaXJlY3QgbWVzc2FnZSB0byB0aGlzIG5vZGUuXG4gICAgICogY29udGFjdEtleSBhbHdheXMgdXNlcyBQS0MgY2hhbm5lbCB3aGVuIGF2YWlsYWJsZSBzbyB0aGUgY29udmVyc2F0aW9uIHRocmVhZFxuICAgICAqIHN0YXlzIGNvbnNpc3RlbnQgcmVnYXJkbGVzcyBvZiBmb3JjZUxlZ2FjeSB0b2dnbGUuXG4gICAgICovXG4gICAgZnVuIGdldERpcmVjdE1lc3NhZ2VSb3V0ZShub2RlOiBOb2RlLCBvdXJOb2RlOiBOb2RlPywgZm9yY2VMZWdhY3k6IEJvb2xlYW4gPSBmYWxzZSk6IFN0cmluZyB7XG4gICAgICAgIHZhbCBub2RlSGFzUEtDID0gb3VyTm9kZT8uaGFzUEtDID09IHRydWUgJiYgbm9kZS5oYXNQS0NcbiAgICAgICAgdmFsIGNvbnRhY3RDaGFubmVsID0gaWYgKG5vZGVIYXNQS0MpIERhdGFQYWNrZXQuUEtDX0NIQU5ORUxfSU5ERVggZWxzZSBub2RlLmNoYW5uZWxcbiAgICAgICAgcmV0dXJuIFwiJHtjb250YWN0Q2hhbm5lbH0ke25vZGUudXNlci5pZH1cIlxuICAgIH0iCiAgICApCikKCnBhdGNoKAogICAgImZlYXR1cmUvbm9kZS9zcmMvY29tbW9uTWFpbi9rb3RsaW4vb3JnL21lc2h0YXN0aWMvZmVhdHVyZS9ub2RlL2RldGFpbC9Ob2RlRGV0YWlsVmlld01vZGVsLmt0IiwKICAgICJUb2dnbGVGb3JjZUxlZ2FjeUNoYW5uZWwiLAogICAgbGFtYmRhIGM6IGMucmVwbGFjZSgKICAgICAgICAiICAgICAgICAgICAgaXMgTm9kZU1lbnVBY3Rpb24uVHJhY2VSb3V0ZSAtPlxuICAgICAgICAgICAgICAgIG5vZGVSZXF1ZXN0QWN0aW9ucy5yZXF1ZXN0VHJhY2Vyb3V0ZSh2aWV3TW9kZWxTY29wZSwgYWN0aW9uLm5vZGUubnVtLCBhY3Rpb24ubm9kZS51c2VyLmxvbmdfbmFtZSlcbiAgICAgICAgICAgIGVsc2UgLT4ge31cbiAgICAgICAgfVxuICAgIH0iLAogICAgICAgICIgICAgICAgICAgICBpcyBOb2RlTWVudUFjdGlvbi5UcmFjZVJvdXRlIC0+XG4gICAgICAgICAgICAgICAgbm9kZVJlcXVlc3RBY3Rpb25zLnJlcXVlc3RUcmFjZXJvdXRlKHZpZXdNb2RlbFNjb3BlLCBhY3Rpb24ubm9kZS5udW0sIGFjdGlvbi5ub2RlLnVzZXIubG9uZ19uYW1lKVxuICAgICAgICAgICAgaXMgTm9kZU1lbnVBY3Rpb24uVG9nZ2xlRm9yY2VMZWdhY3lDaGFubmVsIC0+XG4gICAgICAgICAgICAgICAgb25TZXJ2aWNlQWN0aW9uKFNlcnZpY2VBY3Rpb24uVG9nZ2xlRm9yY2VMZWdhY3lDaGFubmVsKGFjdGlvbi5ub2RlKSlcbiAgICAgICAgICAgIGVsc2UgLT4ge31cbiAgICAgICAgfVxuICAgIH0iCiAgICApCikKCnByaW50KCJEb25lLiIpCg==" | base64 --decode > /tmp/fix.py
+          python3 /tmp/fix.py
+
+      - name: Commit
+        run: |
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Already patched"
+          else
+            git commit -m "fix: stable conversation thread + route ToggleForceLegacyChannel in ViewModel"
+            git push origin main --force-with-lease
+            echo "Pushed."
+          fi

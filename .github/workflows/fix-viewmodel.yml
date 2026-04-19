@@ -1,0 +1,37 @@
+name: Fix toggle viewmodel routing
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          fetch-depth: 0
+
+      - name: Configure git
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+
+      - name: Run fix
+        run: |
+          echo "CmRlZiBwYXRjaChwYXRoLCBjaGVjaywgdHJhbnNmb3JtKToKICAgIHdpdGggb3BlbihwYXRoLCAncicpIGFzIGY6CiAgICAgICAgY29udGVudCA9IGYucmVhZCgpCiAgICBpZiBjaGVjayBpbiBjb250ZW50OgogICAgICAgIHByaW50KCdTS0lQOiAnICsgcGF0aCArICcgYWxyZWFkeSBwYXRjaGVkJykKICAgICAgICByZXR1cm4KICAgIGNvbnRlbnQgPSB0cmFuc2Zvcm0oY29udGVudCkKICAgIHdpdGggb3BlbihwYXRoLCAndycpIGFzIGY6CiAgICAgICAgZi53cml0ZShjb250ZW50KQogICAgcHJpbnQoJ09LOiAgICcgKyBwYXRoKQoKcGF0Y2goCiAgICAnZmVhdHVyZS9ub2RlL3NyYy9jb21tb25NYWluL2tvdGxpbi9vcmcvbWVzaHRhc3RpYy9mZWF0dXJlL25vZGUvZGV0YWlsL05vZGVEZXRhaWxWaWV3TW9kZWwua3QnLAogICAgJ1RvZ2dsZUZvcmNlTGVnYWN5Q2hhbm5lbCcsCiAgICBsYW1iZGEgYzogYy5yZXBsYWNlKAogICAgICAgICcgICAgICAgICAgICBpcyBOb2RlTWVudUFjdGlvbi5UcmFjZVJvdXRlIC0+XG4gICAgICAgICAgICAgICAgbm9kZVJlcXVlc3RBY3Rpb25zLnJlcXVlc3RUcmFjZXJvdXRlKHZpZXdNb2RlbFNjb3BlLCBhY3Rpb24ubm9kZS5udW0sIGFjdGlvbi5ub2RlLnVzZXIubG9uZ19uYW1lKVxuICAgICAgICAgICAgZWxzZSAtPiB7fVxuICAgICAgICB9XG4gICAgfScsCiAgICAgICAgJyAgICAgICAgICAgIGlzIE5vZGVNZW51QWN0aW9uLlRyYWNlUm91dGUgLT5cbiAgICAgICAgICAgICAgICBub2RlUmVxdWVzdEFjdGlvbnMucmVxdWVzdFRyYWNlcm91dGUodmlld01vZGVsU2NvcGUsIGFjdGlvbi5ub2RlLm51bSwgYWN0aW9uLm5vZGUudXNlci5sb25nX25hbWUpXG4gICAgICAgICAgICBpcyBOb2RlTWVudUFjdGlvbi5Ub2dnbGVGb3JjZUxlZ2FjeUNoYW5uZWwgLT5cbiAgICAgICAgICAgICAgICBvblNlcnZpY2VBY3Rpb24oU2VydmljZUFjdGlvbi5Ub2dnbGVGb3JjZUxlZ2FjeUNoYW5uZWwoYWN0aW9uLm5vZGUpKVxuICAgICAgICAgICAgZWxzZSAtPiB7fVxuICAgICAgICB9XG4gICAgfScKICAgICkKKQoKcHJpbnQoIkRvbmUuIikK" | base64 --decode > /tmp/fix.py
+          python3 /tmp/fix.py
+
+      - name: Commit
+        run: |
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Already patched"
+          else
+            git commit -m "fix: route ToggleForceLegacyChannel through NodeDetailViewModel"
+            git push origin main --force-with-lease
+            echo "Pushed."
+          fi

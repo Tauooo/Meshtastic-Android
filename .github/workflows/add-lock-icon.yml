@@ -1,0 +1,37 @@
+name: Add lock icon to encrypted messages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          fetch-depth: 0
+
+      - name: Configure git
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+
+      - name: Run patch
+        run: |
+          echo "CmRlZiBwYXRjaChwYXRoLCBjaGVjaywgdHJhbnNmb3JtKToKICAgIHdpdGggb3BlbihwYXRoLCAiciIpIGFzIGY6CiAgICAgICAgY29udGVudCA9IGYucmVhZCgpCiAgICBpZiBjaGVjayBpbiBjb250ZW50OgogICAgICAgIHByaW50KCJTS0lQOiAiICsgcGF0aCArICIgYWxyZWFkeSBwYXRjaGVkIikKICAgICAgICByZXR1cm4KICAgIGNvbnRlbnQgPSB0cmFuc2Zvcm0oY29udGVudCkKICAgIHdpdGggb3BlbihwYXRoLCAidyIpIGFzIGY6CiAgICAgICAgZi53cml0ZShjb250ZW50KQogICAgcHJpbnQoIk9LOiAgICIgKyBwYXRoKQoKIyAxLiBNZXNzYWdlLmt0IC0gYWRkIGNoYW5uZWwgZmllbGQKcGF0Y2goCiAgICAiY29yZS9tb2RlbC9zcmMvY29tbW9uTWFpbi9rb3RsaW4vb3JnL21lc2h0YXN0aWMvY29yZS9tb2RlbC9NZXNzYWdlLmt0IiwKICAgICJ2YWwgY2hhbm5lbDogSW50IiwKICAgIGxhbWJkYSBjOiBjLnJlcGxhY2UoCiAgICAgICAgIiAgICB2YWwgdHJhbnNwb3J0TWVjaGFuaXNtOiBJbnQgPSAwLCIsCiAgICAgICAgIiAgICB2YWwgdHJhbnNwb3J0TWVjaGFuaXNtOiBJbnQgPSAwLAogICAgdmFsIGNoYW5uZWw6IEludCA9IDAsIgogICAgKQopCgojIDIuIFBhY2tldC5rdCAtIHBhc3MgY2hhbm5lbCBpbiB0b01lc3NhZ2UoKQpwYXRjaCgKICAgICJjb3JlL2RhdGFiYXNlL3NyYy9jb21tb25NYWluL2tvdGxpbi9vcmcvbWVzaHRhc3RpYy9jb3JlL2RhdGFiYXNlL2VudGl0eS9QYWNrZXQua3QiLAogICAgImNoYW5uZWwgPSBjaGFubmVsLCIsCiAgICBsYW1iZGEgYzogYy5yZXBsYWNlKAogICAgICAgICIgICAgICAgICAgICB0cmFuc3BvcnRNZWNoYW5pc20gPSBkYXRhLnRyYW5zcG9ydE1lY2hhbmlzbSwKICAgICAgICApIiwKICAgICAgICAiICAgICAgICAgICAgdHJhbnNwb3J0TWVjaGFuaXNtID0gZGF0YS50cmFuc3BvcnRNZWNoYW5pc20sCiAgICAgICAgICAgIGNoYW5uZWwgPSBjaGFubmVsLAogICAgICAgICkiCiAgICApCikKCiMgMy4gTWVzc2FnZUl0ZW0ua3QgLSBhZGQgbG9jayBpY29uIGltcG9ydCBhbmQgcmVuZGVyIG5leHQgdG8gdGltZXN0YW1wCnBhdGNoKAogICAgImZlYXR1cmUvbWVzc2FnaW5nL3NyYy9jb21tb25NYWluL2tvdGxpbi9vcmcvbWVzaHRhc3RpYy9mZWF0dXJlL21lc3NhZ2luZy9jb21wb25lbnQvTWVzc2FnZUl0ZW0ua3QiLAogICAgImltcG9ydCBvcmcubWVzaHRhc3RpYy5jb3JlLnVpLmljb24uTG9jayIsCiAgICBsYW1iZGEgYzogYy5yZXBsYWNlKAogICAgICAgICJpbXBvcnQgb3JnLm1lc2h0YXN0aWMuY29yZS51aS5pY29uLk1lc2h0YXN0aWNJY29ucyIsCiAgICAgICAgImltcG9ydCBvcmcubWVzaHRhc3RpYy5jb3JlLnVpLmljb24uTG9ja1xuaW1wb3J0IG9yZy5tZXNodGFzdGljLmNvcmUudWkuaWNvbi5NZXNodGFzdGljSWNvbnMiCiAgICApLnJlcGxhY2UoCiAgICAgICAgIiAgICAgICAgICAgICAgICAgICAgVGV4dChtb2RpZmllciA9IE1vZGlmaWVyLnBhZGRpbmcoc3RhcnQgPSAxNi5kcCksIHRleHQgPSBtZXNzYWdlLnRpbWUsIHN0eWxlID0gbWV0YWRhdGFTdHlsZSkiLAogICAgICAgICIgICAgICAgICAgICAgICAgICAgIGlmIChtZXNzYWdlLmNoYW5uZWwgPT0gOCkge1xuICAgICAgICAgICAgICAgICAgICAgICAgSWNvbihcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBpbWFnZVZlY3RvciA9IE1lc2h0YXN0aWNJY29ucy5Mb2NrLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbnRlbnREZXNjcmlwdGlvbiA9IFwiUEtDIGVuY3J5cHRlZFwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIG1vZGlmaWVyID0gTW9kaWZpZXIuc2l6ZSgxMi5kcCkucGFkZGluZyhzdGFydCA9IDQuZHApLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIHRpbnQgPSBNYXRlcmlhbFRoZW1lLmNvbG9yU2NoZW1lLm9uU3VyZmFjZVZhcmlhbnQuY29weShhbHBoYSA9IDAuNmYpLFxuICAgICAgICAgICAgICAgICAgICAgICAgKVxuICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgIFRleHQobW9kaWZpZXIgPSBNb2RpZmllci5wYWRkaW5nKHN0YXJ0ID0gNC5kcCksIHRleHQgPSBtZXNzYWdlLnRpbWUsIHN0eWxlID0gbWV0YWRhdGFTdHlsZSkiCiAgICApCikKCnByaW50KCJEb25lLiIpCg==" | base64 --decode > /tmp/patch.py
+          python3 /tmp/patch.py
+
+      - name: Commit
+        run: |
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Already patched"
+          else
+            git commit -m "feat: show lock icon on PKC encrypted messages"
+            git push origin main --force-with-lease
+            echo "Pushed."
+          fi
