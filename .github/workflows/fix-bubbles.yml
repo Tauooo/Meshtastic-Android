@@ -1,0 +1,37 @@
+name: Fix message bubbles and channel mapping
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          fetch-depth: 0
+
+      - name: Configure git
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+
+      - name: Run fix
+        run: |
+          echo "ZGVmIHBhdGNoKHBhdGgsIGNoZWNrLCB0cmFuc2Zvcm0pOgogICAgd2l0aCBvcGVuKHBhdGgsICJyIikgYXMgZjoKICAgICAgICBjb250ZW50ID0gZi5yZWFkKCkKICAgIGlmIGNoZWNrIGluIGNvbnRlbnQ6CiAgICAgICAgcHJpbnQoIlNLSVA6ICIgKyBwYXRoICsgIiBhbHJlYWR5IHBhdGNoZWQiKQogICAgICAgIHJldHVybgogICAgY29udGVudCA9IHRyYW5zZm9ybShjb250ZW50KQogICAgd2l0aCBvcGVuKHBhdGgsICJ3IikgYXMgZjoKICAgICAgICBmLndyaXRlKGNvbnRlbnQpCiAgICBwcmludCgiT0s6ICAgIiArIHBhdGgpCgpkZWYgZm9yY2VfcGF0Y2gocGF0aCwgdHJhbnNmb3JtKToKICAgIHdpdGggb3BlbihwYXRoLCAiciIpIGFzIGY6CiAgICAgICAgY29udGVudCA9IGYucmVhZCgpCiAgICBjb250ZW50ID0gdHJhbnNmb3JtKGNvbnRlbnQpCiAgICB3aXRoIG9wZW4ocGF0aCwgInciKSBhcyBmOgogICAgICAgIGYud3JpdGUoY29udGVudCkKICAgIHByaW50KCJET05FOiAiICsgcGF0aCkKCiMgRml4IDE6IFJldmVydCBnZXREaXJlY3RNZXNzYWdlUm91dGUgdG8gb3JpZ2luYWwgbG9naWMKIyBPdXIgInN0YWJsZSB0aHJlYWQiIGZpeCBicm9rZSBidWJibGVzIC0gbWVzc2FnZXMgc3RvcmVkIHVuZGVyIG5vZGUuY2hhbm5lbAojIGJ1dCB3ZSB3ZXJlIG9wZW5pbmcgUEtDIGNoYW5uZWwgdGhyZWFkLiBSZXZlcnQgdG8gb3JpZ2luYWwuCmZvcmNlX3BhdGNoKAogICAgImZlYXR1cmUvbm9kZS9zcmMvY29tbW9uTWFpbi9rb3RsaW4vb3JnL21lc2h0YXN0aWMvZmVhdHVyZS9ub2RlL2RldGFpbC9Ob2RlRGV0YWlsVmlld01vZGVsLmt0IiwKICAgIGxhbWJkYSBjOiBjLnJlcGxhY2UoCiAgICAgICAgIiAgICAvKiogUmV0dXJucyB0aGUgdHlwZS1zYWZlIG5hdmlnYXRpb24gcm91dGUgZm9yIGEgZGlyZWN0IG1lc3NhZ2UgdG8gdGhpcyBub2RlLlxuICAgICAqIGNvbnRhY3RLZXkgYWx3YXlzIHVzZXMgUEtDIGNoYW5uZWwgd2hlbiBhdmFpbGFibGUgc28gdGhlIGNvbnZlcnNhdGlvbiB0aHJlYWRcbiAgICAgKiBzdGF5cyBjb25zaXN0ZW50IHJlZ2FyZGxlc3Mgb2YgZm9yY2VMZWdhY3kgdG9nZ2xlLlxuICAgICAqL1xuICAgIGZ1biBnZXREaXJlY3RNZXNzYWdlUm91dGUobm9kZTogTm9kZSwgb3VyTm9kZTogTm9kZT8sIGZvcmNlTGVnYWN5OiBCb29sZWFuID0gZmFsc2UpOiBTdHJpbmcge1xuICAgICAgICB2YWwgbm9kZUhhc1BLQyA9IG91ck5vZGU/Lmhhc1BLQyA9PSB0cnVlICYmIG5vZGUuaGFzUEtDXG4gICAgICAgIHZhbCBjb250YWN0Q2hhbm5lbCA9IGlmIChub2RlSGFzUEtDKSBEYXRhUGFja2V0LlBLQ19DSEFOTkVMX0lOREVYIGVsc2Ugbm9kZS5jaGFubmVsXG4gICAgICAgIHJldHVybiBcIiR7Y29udGFjdENoYW5uZWx9JHtub2RlLnVzZXIuaWR9XCJcbiAgICB9IiwKICAgICAgICAiICAgIC8qKiBSZXR1cm5zIHRoZSB0eXBlLXNhZmUgbmF2aWdhdGlvbiByb3V0ZSBmb3IgYSBkaXJlY3QgbWVzc2FnZSB0byB0aGlzIG5vZGUuICovXG4gICAgZnVuIGdldERpcmVjdE1lc3NhZ2VSb3V0ZShub2RlOiBOb2RlLCBvdXJOb2RlOiBOb2RlPywgZm9yY2VMZWdhY3k6IEJvb2xlYW4gPSBmYWxzZSk6IFN0cmluZyB7XG4gICAgICAgIHZhbCBoYXNQS0MgPSAhZm9yY2VMZWdhY3kgJiYgb3VyTm9kZT8uaGFzUEtDID09IHRydWUgJiYgbm9kZS5oYXNQS0NcbiAgICAgICAgdmFsIGNoYW5uZWwgPSBpZiAoaGFzUEtDKSBEYXRhUGFja2V0LlBLQ19DSEFOTkVMX0lOREVYIGVsc2Ugbm9kZS5jaGFubmVsXG4gICAgICAgIHJldHVybiBcIiR7Y2hhbm5lbH0ke25vZGUudXNlci5pZH1cIlxuICAgIH0iCiAgICApCikKCiMgRml4IDI6IEFkZCBjaGFubmVsIHRvIFBhY2tldC50b01lc3NhZ2UoKSAtIG11c3QgZ28gSU5TSURFIHRoZSBNZXNzYWdlKCkgY2FsbAojIFByZXZpb3VzIHBhdGNoIGFjY2lkZW50YWxseSBwdXQgaXQgaW4gUmVhY3Rpb25FbnRpdHkudG9SZWFjdGlvbigpIGluc3RlYWQKcGF0Y2goCiAgICAiY29yZS9kYXRhYmFzZS9zcmMvY29tbW9uTWFpbi9rb3RsaW4vb3JnL21lc2h0YXN0aWMvY29yZS9kYXRhYmFzZS9lbnRpdHkvUGFja2V0Lmt0IiwKICAgICJ0cmFuc3BvcnRNZWNoYW5pc20gPSBkYXRhLnRyYW5zcG9ydE1lY2hhbmlzbSxcbiAgICAgICAgICAgIGNoYW5uZWwgPSBjaGFubmVsLCIsCiAgICBsYW1iZGEgYzogYy5yZXBsYWNlKAogICAgICAgICIgICAgICAgICAgICB0cmFuc3BvcnRNZWNoYW5pc20gPSBkYXRhLnRyYW5zcG9ydE1lY2hhbmlzbSxcbiAgICAgICAgKVxuICAgIH1cbn0iLAogICAgICAgICIgICAgICAgICAgICB0cmFuc3BvcnRNZWNoYW5pc20gPSBkYXRhLnRyYW5zcG9ydE1lY2hhbmlzbSxcbiAgICAgICAgICAgIGNoYW5uZWwgPSBjaGFubmVsLFxuICAgICAgICApXG4gICAgfVxufSIKICAgICkKKQoKcHJpbnQoIkRvbmUuIikK" | base64 --decode > /tmp/fix.py
+          python3 /tmp/fix.py
+
+      - name: Commit
+        run: |
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Already patched"
+          else
+            git commit -m "fix: revert contactKey change + fix channel in toMessage()"
+            git push origin main --force-with-lease
+            echo "Pushed."
+          fi
