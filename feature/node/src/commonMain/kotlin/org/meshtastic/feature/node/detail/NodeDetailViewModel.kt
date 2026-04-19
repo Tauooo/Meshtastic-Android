@@ -122,10 +122,13 @@ class NodeDetailViewModel(
         nodeManagementActions.setNodeNotes(viewModelScope, nodeNum, notes)
     }
 
-    /** Returns the type-safe navigation route for a direct message to this node. */
+    /** Returns the type-safe navigation route for a direct message to this node.
+     * contactKey always uses PKC channel when available so the conversation thread
+     * stays consistent regardless of forceLegacy toggle.
+     */
     fun getDirectMessageRoute(node: Node, ourNode: Node?, forceLegacy: Boolean = false): String {
-        val hasPKC = !forceLegacy && ourNode?.hasPKC == true && node.hasPKC
-        val channel = if (hasPKC) DataPacket.PKC_CHANNEL_INDEX else node.channel
-        return "${channel}${node.user.id}"
+        val nodeHasPKC = ourNode?.hasPKC == true && node.hasPKC
+        val contactChannel = if (nodeHasPKC) DataPacket.PKC_CHANNEL_INDEX else node.channel
+        return "${contactChannel}${node.user.id}"
     }
 }
