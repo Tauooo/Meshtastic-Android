@@ -182,6 +182,7 @@
     <string name="mute_always">Sempre</string>
     <string name="traceroute_log">Traçar ruta</string>
     <string name="region_frequency_plan">Regió</string>
+    <string name="mqtt_status_disconnected">Desconnectat</string>
     <string name="timeout">Temps esgotat</string>
     <string name="distance">Distància</string>
     <string name="meshtastic">Meshtastic</string>
@@ -199,4 +200,6 @@
     <!-- Compass -->
     <!-- Message Filter -->
     <!-- Network Map Layers -->
+    <string name="desktop_notification_title">Meshtastic</string>
+    <string name="filter_icon">Filtre</string>
 </resources>

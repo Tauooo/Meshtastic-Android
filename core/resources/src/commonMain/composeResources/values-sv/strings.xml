@@ -339,12 +339,9 @@
     <string name="userinfo">Användarinfo</string>
     <string name="meshtastic_new_nodes_notifications">Ny nod avisering</string>
     <string name="snr">SNR</string>
-    <string name="snr_definition">Signal-to-Noise Ratio, är ett mått som används inom kommunikation för att kvantifiera nivån av en önskad signal mot nivån av bakgrundsbrus. I Meshtastic och andra trådlösa system indikerar en högre SNR en tydligare signal som kan förbättra tillförlitligheten och kvaliteten på dataöverföringen.</string>
     <string name="rssi">RSSI</string>
-    <string name="rssi_definition">Received Signal Strength Indicator, ett mått som används för att avgöra effektnivån som togs emot av antennen. Ett högre RSSI-värde indikerar generellt en starkare och stabilare anslutning.</string>
     <string name="iaq_definition">(Indoor Air Quality) relativ skala IAQ värdet mätt med Bosch BME600. Värdeintervall 0-500.</string>
     <string name="device_metrics_log">Enhetens mätvärden</string>
-    <string name="node_map">Nod karta</string>
     <string name="position_log">Plats</string>
     <string name="last_position_update">Senaste positionsuppdatering</string>
     <string name="env_metrics_log">Miljövärden</string>
@@ -529,6 +526,10 @@
     <string name="ignore_mqtt">Ignorera MQTT</string>
     <string name="ok_to_mqtt">Ok till MQTT</string>
     <string name="mqtt_config">MQTT-konfiguration</string>
+    <string name="mqtt_status_disconnected">Frånkopplad</string>
+    <string name="mqtt_status_connected">Ansluten</string>
+    <string name="mqtt_test_connection">Testa anslutningen</string>
+    <string name="mqtt_probe_other_failure">Anslutningen misslyckades</string>
     <string name="mqtt_enabled">MQTT är aktiverat</string>
     <string name="address">Adress</string>
     <string name="username">Användarnamn</string>
@@ -945,4 +946,7 @@
     <string name="traffic_management_enabled">Modul aktiverad</string>
     <string name="connect">Anslut</string>
     <string name="done">Klart</string>
+    <string name="desktop_notification_title">Meshtastic</string>
+    <string name="filter_icon">Filter</string>
+    <string name="action_select_device">Välj enhet</string>
 </resources>

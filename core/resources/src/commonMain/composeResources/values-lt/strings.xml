@@ -190,7 +190,6 @@
     <string name="meshtastic_new_nodes_notifications">Naujo įtaiso pranešimas</string>
     <string name="snr">SNR</string>
     <string name="rssi">RSSI</string>
-    <string name="node_map">Įtaisų žemėlapis</string>
     <string name="administration">Administravimas</string>
     <string name="remote_admin">Nuotolinis administravimas</string>
     <string name="bad">Silpnas</string>
@@ -217,6 +216,7 @@
     <string name="alert_bell_text">Skambučio simbolis!</string>
     <string name="red">Raudona</string>
     <string name="region_frequency_plan">Regionas</string>
+    <string name="mqtt_status_disconnected">Atsijungta</string>
     <string name="public_key">Viešasis raktas</string>
     <string name="private_key">Privatus raktas</string>
     <string name="timeout">Baigėsi laikas</string>
@@ -237,4 +237,5 @@
     <!-- Message Filter -->
     <!-- Network Map Layers -->
     <string name="tak_team_red">Raudona</string>
+    <string name="filter_icon">Filtras</string>
 </resources>

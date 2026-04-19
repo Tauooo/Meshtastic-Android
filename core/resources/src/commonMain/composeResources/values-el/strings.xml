@@ -164,6 +164,7 @@
     <string name="messages">Μηνύματα</string>
     <string name="lora_config">LoRa</string>
     <string name="region_frequency_plan">Περιφέρεια</string>
+    <string name="mqtt_status_disconnected">Αποσυνδεδεμένο</string>
     <string name="address">Διεύθυνση</string>
     <string name="username">Όνομα χρήστη</string>
     <string name="password">Κωδικός πρόσβασης</string>
@@ -200,4 +201,5 @@
     <string name="tak_team_red">Κόκκινο</string>
     <string name="tak_team_blue">Μπλε</string>
     <string name="tak_team_green">Πράσινο</string>
+    <string name="filter_icon">Φίλτρο</string>
 </resources>

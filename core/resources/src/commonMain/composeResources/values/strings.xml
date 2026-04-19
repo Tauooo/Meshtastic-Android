@@ -408,12 +408,9 @@
     <string name="userinfo">User Info</string>
     <string name="meshtastic_new_nodes_notifications">New node notifications</string>
     <string name="snr">SNR</string>
-    <string name="snr_definition">Signal-to-Noise Ratio, a measure used in communications to quantify the level of a desired signal to the level of background noise. In Meshtastic and other wireless systems, a higher SNR indicates a clearer signal that can enhance the reliability and quality of data transmission.</string>
     <string name="rssi">RSSI</string>
-    <string name="rssi_definition">Received Signal Strength Indicator, a measurement used to determine the power level being received by the antenna. A higher RSSI value generally indicates a stronger and more stable connection.</string>
     <string name="iaq_definition">(Indoor Air Quality) relative scale IAQ value as measured by Bosch BME680. Value Range 0–500.</string>
     <string name="device_metrics_log">Device Metrics</string>
-    <string name="node_map">Node Map</string>
     <string name="position_log">Position</string>
     <string name="last_position_update">Last position update</string>
     <string name="env_metrics_log">Environment Metrics</string>
@@ -460,7 +457,6 @@
     <string name="one_month">1M</string>
     <string name="max">Max</string>
     <string name="min">Min</string>
-    <string name="avg">Avg</string>
     <string name="expand_chart">Expand chart</string>
     <string name="collapse_chart">Collapse chart</string>
     <string name="unknown_age">Unknown Age</string>
@@ -638,6 +634,23 @@
     <string name="ignore_mqtt">Ignore MQTT</string>
     <string name="ok_to_mqtt">Ok to MQTT</string>
     <string name="mqtt_config">MQTT Config</string>
+    <string name="mqtt_status_inactive">Inactive</string>
+    <string name="mqtt_status_disconnected">Disconnected</string>
+    <string name="mqtt_status_disconnected_with_reason">Disconnected — %1$s</string>
+    <string name="mqtt_status_connecting">Connecting…</string>
+    <string name="mqtt_status_connected">Connected</string>
+    <string name="mqtt_status_reconnecting">Reconnecting…</string>
+    <string name="mqtt_status_reconnecting_with_attempt">Reconnecting (attempt %1$d) — %2$s</string>
+    <string name="mqtt_test_connection">Test connection</string>
+    <string name="mqtt_probe_running">Probing broker…</string>
+    <string name="mqtt_probe_success">Reachable. Broker accepted credentials.</string>
+    <string name="mqtt_probe_success_with_info">Reachable (%1$s)</string>
+    <string name="mqtt_probe_rejected">Broker rejected: %1$s</string>
+    <string name="mqtt_probe_dns_failure">Host not found</string>
+    <string name="mqtt_probe_tcp_failure">Cannot reach broker (TCP)</string>
+    <string name="mqtt_probe_tls_failure">TLS handshake failed</string>
+    <string name="mqtt_probe_timeout">Timed out after %1$d ms</string>
+    <string name="mqtt_probe_other_failure">Connection failed</string>
     <string name="mqtt_enabled">MQTT enabled</string>
     <string name="address">Address</string>
     <string name="username">Username</string>
@@ -1261,4 +1274,22 @@
     <string name="wifi_provision_ssid_placeholder">Enter or select a network</string>
     <string name="wifi_provision_status_applied">WiFi configured successfully!</string>
     <string name="wifi_provision_status_failed">Failed to apply WiFi configuration</string>
+    <string name="desktop_tray_tooltip">Meshtastic Desktop</string>
+    <string name="desktop_tray_show">Show Meshtastic</string>
+    <string name="desktop_tray_quit">Quit</string>
+    <string name="desktop_notification_title">Meshtastic</string>
+    <string name="export_tak_data_package">Export TAK Data Package</string>
+    <string name="mpwrd_os" translatable="false">mPWRD-OS</string>
+    <string name="clear_time_zone">Clear time zone</string>
+    <string name="filter_icon">Filter</string>
+    <string name="remove_filter">Remove filter</string>
+    <string name="show_iaq_legend">Show air quality legend</string>
+    <string name="action_show_message_status">Show message status</string>
+    <string name="action_send_reply">Send reply</string>
+    <string name="action_copy_message">Copy message</string>
+    <string name="action_select_message">Select message</string>
+    <string name="action_delete_message">Delete message</string>
+    <string name="action_react_with_emoji">React with emoji</string>
+    <string name="action_select_device">Select device</string>
+    <string name="action_select_network">Select network</string>
 </resources>
