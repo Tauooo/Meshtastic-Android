@@ -28,5 +28,8 @@ class DeviceHardwareRemoteDataSource(
     private val dispatchers: CoroutineDispatchers,
 ) {
     suspend fun getAllDeviceHardware(): List<NetworkDeviceHardware> =
-        withContext(dispatchers.io) { apiService.getDeviceHardware() }
+        withContext(dispatchers.io) {
+            try { apiService.getDeviceHardware() }
+            catch (e: NotImplementedError) { emptyList() }
+        }
 }

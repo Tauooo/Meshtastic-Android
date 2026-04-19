@@ -158,9 +158,6 @@ configure<ApplicationExtension> {
     productFlavors {
         configureEach {
             versionName = "${defaultConfig.versionName} (${defaultConfig.versionCode}) $name"
-            if (name == "google") {
-                manifestPlaceholders["MAPS_API_KEY"] = "dummy"
-            }
         }
     }
 
