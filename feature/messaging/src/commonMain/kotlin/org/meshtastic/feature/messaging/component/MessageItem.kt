@@ -72,6 +72,7 @@ import org.meshtastic.core.ui.component.TransportIcon
 import org.meshtastic.core.ui.emoji.EmojiPickerDialog
 import org.meshtastic.core.ui.icon.FormatQuote
 import org.meshtastic.core.ui.icon.HopCount
+import org.meshtastic.core.ui.icon.Lock
 import org.meshtastic.core.ui.icon.MeshtasticIcons
 import org.meshtastic.core.ui.theme.ContrastLevel
 import org.meshtastic.core.ui.theme.LocalContrastLevel
@@ -350,7 +351,15 @@ fun MessageItem(
                         )
                     }
                     Spacer(modifier = Modifier.weight(1f))
-                    Text(modifier = Modifier.padding(start = 16.dp), text = message.time, style = metadataStyle)
+                    if (message.channel == 8) {
+                        Icon(
+                            imageVector = MeshtasticIcons.Lock,
+                            contentDescription = "PKC encrypted",
+                            modifier = Modifier.size(12.dp).padding(start = 4.dp),
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
+                        )
+                    }
+                    Text(modifier = Modifier.padding(start = 4.dp), text = message.time, style = metadataStyle)
                 }
             }
         }

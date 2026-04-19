@@ -95,6 +95,7 @@ data class Message(
     val filtered: Boolean = false,
     /** The transport mechanism this packet arrived over (see [MeshPacket.TransportMechanism]). */
     val transportMechanism: Int = 0,
+    val channel: Int = 0,
 ) {
     fun getStatusStringRes(): Pair<StringResource, StringResource> {
         val title = if (routingError > 0) Res.string.error else Res.string.message_delivery_status
