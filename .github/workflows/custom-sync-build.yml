@@ -41,7 +41,7 @@ jobs:
               git merge --abort
               exit 1
             }
-            git push origin main
+            git push origin main --force-with-lease
             echo "changed=true" >> $GITHUB_OUTPUT
             echo "### Merged upstream" >> $GITHUB_STEP_SUMMARY
           fi
