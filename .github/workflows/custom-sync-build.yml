@@ -1,4 +1,4 @@
-name: alphasigma — Sync & Build App
+name: alphasigma - Sync & Build App
 
 on:
   schedule:
@@ -7,7 +7,6 @@ on:
 
 permissions:
   contents: write
-  workflows: write
 
 jobs:
   sync:
@@ -18,6 +17,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          submodules: false
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Configure git
@@ -34,16 +34,16 @@ jobs:
           UPSTREAM=$(git rev-parse upstream/main)
           if [ "$LOCAL" = "$UPSTREAM" ]; then
             echo "changed=false" >> $GITHUB_OUTPUT
-            echo "### ⏭ No upstream changes today" >> $GITHUB_STEP_SUMMARY
+            echo "### No upstream changes today" >> $GITHUB_STEP_SUMMARY
           else
             git merge upstream/main --no-edit || {
-              echo "### ❌ Merge conflict — resolve manually" >> $GITHUB_STEP_SUMMARY
+              echo "### Merge conflict - resolve manually" >> $GITHUB_STEP_SUMMARY
               git merge --abort
               exit 1
             }
             git push origin main
             echo "changed=true" >> $GITHUB_OUTPUT
-            echo "### ✅ Merged upstream" >> $GITHUB_STEP_SUMMARY
+            echo "### Merged upstream" >> $GITHUB_STEP_SUMMARY
           fi
 
   build:
@@ -52,6 +52,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - uses: actions/setup-java@v4
         with:
@@ -60,15 +62,32 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v4
 
-      - name: Write Maps API key
-        run: echo "MAPS_API_KEY=${{ secrets.MAPS_API_KEY }}" >> local.properties
+      - name: Decode keystore
+        run: |
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > keystore.jks
 
-      - name: Build alphasigma APK
-        run: ./gradlew app:assembleFdroidDebug
+      - name: Write secrets.properties
+        run: |
+          printf 'MAPS_API_KEY=%s\n' "${{ secrets.MAPS_API_KEY }}" > secrets.properties
+
+      - name: Write local.properties
+        run: |
+          echo "sdk.dir=$ANDROID_HOME" > local.properties
+
+      - name: Write keystore.properties
+        run: |
+          printf 'storeFile=%s\nstorePassword=%s\nkeyAlias=%s\nkeyPassword=%s\n' \
+            "${{ github.workspace }}/keystore.jks" \
+            "${{ secrets.KEYSTORE_STORE_PASSWORD }}" \
+            "${{ secrets.KEYSTORE_KEY_ALIAS }}" \
+            "${{ secrets.KEYSTORE_KEY_PASSWORD }}" > keystore.properties
+
+      - name: Build Google Release APK
+        run: ./gradlew app:assembleGoogleRelease -x uploadCrashlyticsMappingFileGoogleRelease
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: alphasigma-app-debug
-          path: app/build/outputs/apk/fdroid/debug/*.apk
+          name: alphasigma-app-google-release
+          path: app/build/outputs/apk/google/release/*.apk
           retention-days: 30
