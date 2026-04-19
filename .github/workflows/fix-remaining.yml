@@ -1,0 +1,37 @@
+name: Fix remaining bugs
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          fetch-depth: 0
+
+      - name: Configure git
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+
+      - name: Run fix script
+        run: |
+          echo "CmltcG9ydCBvcwoKZGVmIHBhdGNoKHBhdGgsIGNoZWNrLCB0cmFuc2Zvcm0pOgogICAgd2l0aCBvcGVuKHBhdGgsICdyJykgYXMgZjoKICAgICAgICBjb250ZW50ID0gZi5yZWFkKCkKICAgIGlmIGNoZWNrIGluIGNvbnRlbnQ6CiAgICAgICAgcHJpbnQoJ1NLSVA6ICcgKyBwYXRoICsgJyBhbHJlYWR5IHBhdGNoZWQnKQogICAgICAgIHJldHVybgogICAgY29udGVudCA9IHRyYW5zZm9ybShjb250ZW50KQogICAgd2l0aCBvcGVuKHBhdGgsICd3JykgYXMgZjoKICAgICAgICBmLndyaXRlKGNvbnRlbnQpCiAgICBwcmludCgnT0s6ICAgJyArIHBhdGgpCgpwYXRjaCgKICAgICdjb3JlL25ldHdvcmsvc3JjL2NvbW1vbk1haW4va290bGluL29yZy9tZXNodGFzdGljL2NvcmUvbmV0d29yay9EZXZpY2VIYXJkd2FyZVJlbW90ZURhdGFTb3VyY2Uua3QnLAogICAgJ05vdEltcGxlbWVudGVkRXJyb3InLAogICAgbGFtYmRhIGM6IGMucmVwbGFjZSgKICAgICAgICAnICAgIHN1c3BlbmQgZnVuIGdldEFsbERldmljZUhhcmR3YXJlKCk6IExpc3Q8TmV0d29ya0RldmljZUhhcmR3YXJlPiA9XG4gICAgICAgIHdpdGhDb250ZXh0KGRpc3BhdGNoZXJzLmlvKSB7IGFwaVNlcnZpY2UuZ2V0RGV2aWNlSGFyZHdhcmUoKSB9JywKICAgICAgICAnICAgIHN1c3BlbmQgZnVuIGdldEFsbERldmljZUhhcmR3YXJlKCk6IExpc3Q8TmV0d29ya0RldmljZUhhcmR3YXJlPiA9XG4gICAgICAgIHdpdGhDb250ZXh0KGRpc3BhdGNoZXJzLmlvKSB7XG4gICAgICAgICAgICB0cnkgeyBhcGlTZXJ2aWNlLmdldERldmljZUhhcmR3YXJlKCkgfVxuICAgICAgICAgICAgY2F0Y2ggKGU6IE5vdEltcGxlbWVudGVkRXJyb3IpIHsgZW1wdHlMaXN0KCkgfVxuICAgICAgICB9JwogICAgKQopCgpwYXRjaCgKICAgICdhcHAvYnVpbGQuZ3JhZGxlLmt0cycsCiAgICAnbm9fZHVtbXknLAogICAgbGFtYmRhIGM6IGMucmVwbGFjZSgKICAgICAgICAnICAgICAgICAgICAgaWYgKG5hbWUgPT0gImdvb2dsZSIpIHtcbiAgICAgICAgICAgICAgICBtYW5pZmVzdFBsYWNlaG9sZGVyc1siTUFQU19BUElfS0VZIl0gPSAiZHVtbXkiXG4gICAgICAgICAgICB9XG4nLAogICAgICAgICcnCiAgICApCikKCnByaW50KCdBbGwgZG9uZS4nKQo=" | base64 --decode > /tmp/fix.py
+          python3 /tmp/fix.py
+
+      - name: Commit fixes
+        run: |
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Nothing to commit"
+          else
+            git commit -m "fix: DeviceHardware fdroid crash + remove dummy Maps key"
+            git push origin main
+            echo "Pushed."
+          fi
