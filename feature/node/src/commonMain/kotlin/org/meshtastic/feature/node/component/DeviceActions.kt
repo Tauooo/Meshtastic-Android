@@ -79,7 +79,6 @@ fun DeviceActions(
             PrimaryActionsRow(
                 node = node,
                 isLocal = isLocal,
-                forceLegacyChannel = node.forceLegacyChannel,
                 onAction = onAction,
             )
 
@@ -87,8 +86,6 @@ fun DeviceActions(
                 SectionDivider(Modifier.padding(vertical = 8.dp))
                 ManagementActions(
                     node = node,
-                    forceLegacyChannel = node.forceLegacyChannel,
-                    onToggleLegacy = { forceLegacyChannel = it },
                     onAction = onAction,
                 )
             }
@@ -112,7 +109,6 @@ fun DeviceActions(
 private fun PrimaryActionsRow(
     node: Node,
     isLocal: Boolean,
-    forceLegacyChannel: Boolean,
     onAction: (NodeDetailAction) -> Unit,
 ) {
     Row(
@@ -125,7 +121,7 @@ private fun PrimaryActionsRow(
                 onClick = {
                     onAction(
                         NodeDetailAction.HandleNodeMenuAction(
-                            NodeMenuAction.DirectMessage(node, forceLegacy = forceLegacyChannel)
+                            NodeMenuAction.DirectMessage(node, forceLegacy = node.forceLegacyChannel)
                         )
                     )
                 },
@@ -174,8 +170,6 @@ private fun PrimaryActionsRow(
 @Composable
 private fun ManagementActions(
     node: Node,
-    forceLegacyChannel: Boolean,
-    onToggleLegacy: (Boolean) -> Unit,
     onAction: (NodeDetailAction) -> Unit,
 ) {
     Column {
@@ -199,8 +193,8 @@ private fun ManagementActions(
             SwitchListItem(
                 text = "Force legacy channel (bypass PKC)",
                 leadingIcon = MeshtasticIcons.Message,
-                checked = forceLegacyChannel,
-                onClick = { onToggleLegacy(!forceLegacyChannel) },
+                checked = node.forceLegacyChannel,
+                onClick = { onAction(NodeDetailAction.HandleNodeMenuAction(NodeMenuAction.ToggleForceLegacyChannel(node))) },
             )
         }
 
