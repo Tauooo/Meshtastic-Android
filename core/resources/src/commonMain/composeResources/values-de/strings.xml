@@ -176,6 +176,9 @@
     <string name="no_network_devices_found">Keine Netzwerkgeräte gefunden</string>
     <string name="no_usb_devices_found">Kein USB-Gerät gefunden.</string>
     <string name="usb">USB</string>
+    <string name="transport_ble">BLE</string>
+    <string name="transport_tcp">TCP</string>
+    <string name="transport_usb">USB</string>
     <string name="demo_mode">Demo Modus</string>
     <string name="connected_sleeping">Mit Funkgerät verbunden, aber es ist im Schlafmodus</string>
     <string name="app_too_old">Anwendungsaktualisierung erforderlich</string>
@@ -791,6 +794,7 @@
     <string name="request_host_metrics">Host Kennzahlen</string>
     <string name="request_pax_metrics">Benutzerzählerdaten</string>
     <string name="request_metadata">Metadaten</string>
+    <string name="retry">Erneut versuchen</string>
     <string name="actions">Aktionen</string>
     <string name="firmware">Firmware</string>
     <string name="use_12h_format">12h Uhrformat verwenden</string>
@@ -901,7 +905,10 @@
     <string name="firmware_edition">Firmware-Version</string>
     <string name="recent_network_devices">Kürzliche Netzwerkgeräte</string>
     <string name="discovered_network_devices">Entdeckte Netzwerkgeräte</string>
+    <string name="scanning_network">Suche...</string>
+    <string name="scanning_bluetooth">Suche...</string>
     <string name="bluetooth_available_devices">Verfügbare Bluetooth Geräte</string>
+    <string name="nodes_empty_disconnected_title">Kein Gerät verbunden</string>
     <string name="get_started">Erste Schritte</string>
     <string name="intro_welcome">Willkommen bei</string>
     <string name="stay_connected_anywhere">Bleibe überall in Verbindung</string>

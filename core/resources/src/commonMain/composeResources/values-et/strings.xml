@@ -176,6 +176,7 @@
     <string name="no_network_devices_found">Võrguseadmeid ei leitud</string>
     <string name="no_usb_devices_found">USB seadmeid ei leitud</string>
     <string name="usb">USB</string>
+    <string name="transport_usb">USB</string>
     <string name="demo_mode">Demo režiim</string>
     <string name="connected_sleeping">Ühendatud raadioga, aga see on unerežiimis</string>
     <string name="app_too_old">Vajalik on rakenduse värskendus</string>
@@ -791,6 +792,7 @@
     <string name="request_host_metrics">Hosti mõõdik</string>
     <string name="request_pax_metrics">Pax mõõdiku küsimine</string>
     <string name="request_metadata">Metaandmed</string>
+    <string name="retry">Proovi uuesti</string>
     <string name="actions">Toimingud</string>
     <string name="firmware">Püsivara</string>
     <string name="use_12h_format">Kasuta 12 tunni formaati</string>
@@ -901,7 +903,10 @@
     <string name="firmware_edition">Püsivara versioon</string>
     <string name="recent_network_devices">Hiljuti nähtud seadmed</string>
     <string name="discovered_network_devices">Avastatud seadmed</string>
+    <string name="scanning_network">Otsin…</string>
+    <string name="scanning_bluetooth">Otsin…</string>
     <string name="bluetooth_available_devices">Saadaval olevad sinhamba seadmed</string>
+    <string name="nodes_empty_disconnected_title">Ühtegi seadet pole ühendatud</string>
     <string name="get_started">Algusesse</string>
     <string name="intro_welcome">Teretulemast</string>
     <string name="stay_connected_anywhere">Igal pool ühenduses</string>

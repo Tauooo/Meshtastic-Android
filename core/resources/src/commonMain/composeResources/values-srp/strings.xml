@@ -124,6 +124,7 @@
     <string name="ip_address">IP адреса:</string>
     <string name="connected">Блутут повезан</string>
     <string name="not_connected">Није повезан</string>
+    <string name="transport_ble">БЛЕ</string>
     <string name="connected_sleeping">Повезан на радио уређај, али уређај је у стању спавања</string>
     <string name="app_too_old">Неопходно је ажурирање апликације</string>
     <string name="must_update">Морате ажурирати ову апликацију у продавници апликација (или на Гитхабу). Превише је стара да би могла комуницирати са овим радио фирмвером. Молимо вас да прочитате наша &lt;a href='https://meshtastic.org/docs/software/android/installation'&gt;документа&lt;/a&gt; на ову тему.</string>
@@ -407,6 +408,7 @@
     <string name="security_icon_help_dismiss">Отпусти</string>
     <string name="delete_messages_title">Обриши поруке?</string>
     <string name="message_input_label">Порука</string>
+    <string name="nodes_empty_disconnected_title">Нема повезаних уређаја</string>
     <string name="settings">подешавања</string>
     <string name="map_type_satellite">Сателит</string>
     <string name="map_type_hybrid">Хибридни</string>

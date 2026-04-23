@@ -150,6 +150,7 @@
     <string name="no_network_devices_found">Nenalezena žádná síťová zařízení</string>
     <string name="no_usb_devices_found">Nenalezena žádná USB zařízení</string>
     <string name="usb">USB</string>
+    <string name="transport_usb">USB</string>
     <string name="demo_mode">Demo režim</string>
     <string name="connected_sleeping">Připojené k uspanému vysílači</string>
     <string name="app_too_old">Aplikace je příliš stará</string>
@@ -661,6 +662,7 @@
     <string name="request_air_quality_metrics">Metriky kvality ovzduší</string>
     <string name="request_power_metrics">Metriky napájení</string>
     <string name="request_metadata">Metadata</string>
+    <string name="retry">Zkusit znovu</string>
     <string name="actions">Akce</string>
     <string name="firmware">Firmware</string>
     <string name="use_12h_format">Použít 12h formát hodin</string>
@@ -747,6 +749,7 @@
     <string name="recent_network_devices">Nedávná síťová zařízení</string>
     <string name="discovered_network_devices">Nalezená síťová zařízení</string>
     <string name="bluetooth_available_devices">Dostupná Bluetooth zařízení</string>
+    <string name="nodes_empty_disconnected_title">Není připojeno žádné zařízení</string>
     <string name="get_started">Začněte hned</string>
     <string name="intro_welcome">Vítejte v</string>
     <string name="stay_connected_anywhere">Zůstaňte připojeni kdekoliv</string>
