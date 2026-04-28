@@ -66,7 +66,7 @@ ktor = "3.4.3"
 aboutlibraries = "14.0.1"
 jserialcomm = "2.11.4"
 coil = "3.4.0"
-datadog-gradle = "1.25.0"
+datadog-gradle = "1.26.0"
 dd-sdk-android = "3.9.1"
 detekt = "1.23.8"
 dokka = "2.2.0"
@@ -263,6 +263,7 @@ spotless-gradlePlugin = { module = "com.diffplug.spotless:spotless-plugin-gradle
 test-retry-gradlePlugin = { module = "org.gradle:test-retry-gradle-plugin", version.ref = "testRetry" }
 
 jmdns = { module = "org.jmdns:jmdns", version.ref = "jmdns" }
+jna = { module = "net.java.dev.jna:jna", version = "5.18.1" }
 
 [plugins]
 # Android
