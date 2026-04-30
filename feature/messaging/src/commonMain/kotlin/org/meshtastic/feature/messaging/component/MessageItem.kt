@@ -306,10 +306,7 @@ fun MessageItem(
                                     imageVector = MeshtasticIcons.HopCount,
                                     contentDescription = null,
                                     modifier = Modifier.size(14.dp),
-                                    tint =
-                                    contentColor.copy(
-                                        alpha = if (contrastLevel == ContrastLevel.HIGH) 1f else 0.7f,
-                                    ),
+                                    tint = Color.White,
                                 )
                                 Text(
                                     text =
@@ -319,6 +316,7 @@ fun MessageItem(
                                         "?"
                                     },
                                     style = metadataStyle,
+                                    color = Color.White,
                                 )
                             }
                         }
